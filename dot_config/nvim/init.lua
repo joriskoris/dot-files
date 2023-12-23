@@ -56,6 +56,12 @@ local plugins = {
       "saadparwaiz1/cmp_luasnip",
     },
   },
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require("lspsaga").setup({})
+    end,
+  },
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   -- AI
@@ -192,7 +198,10 @@ wk.register({
   },
   ["<leader>c"] = {
     name = "+Copilot",
-    t = { "<cmd>Copilot toggle<cr>", "toggle" },
+    t = { function()
+      vim.cmd("Copilot toggle")
+      vim.cmd("Copilot status")
+    end, "toggle" },
     p = { "<cmd>Copilot panel<cr>", "panel" },
     s = { function()
       require("copilot.suggestion").toggle_auto_trigger()
