@@ -88,7 +88,7 @@ vim.opt.expandtab = true
 vim.opt.smarttab = true
 
 -- theme
-vim.cmd.colorscheme "catppuccin-latte"
+vim.cmd.colorscheme "catppuccin-frappe"
 
 -- sidebar
 vim.g.loaded_netrw = 1
