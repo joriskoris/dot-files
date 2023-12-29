@@ -4,3 +4,4 @@ sindresorhus/pure kind:fpath
 # syntax highlight
 catppuccin/zsh-syntax-highlighting path:themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 zsh-users/zsh-syntax-highlighting kind:zsh
+zsh-users/zsh-history-substring-search kind:zsh
