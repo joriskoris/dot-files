@@ -1,0 +1,12 @@
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+antidote load
+
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+
+autoload -U promptinit; promptinit
+prompt pure
+
+# bind history keys
+bindkey -v
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
