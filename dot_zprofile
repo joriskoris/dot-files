@@ -24,6 +24,6 @@ source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 antidote load
 autoload -Uz promptinit && promptinit && prompt pure
 
-
+export EDITOR=nvim
 # enable history search
 bindkey '^r' history-incremental-search-backward
