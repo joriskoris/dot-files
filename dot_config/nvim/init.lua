@@ -86,6 +86,7 @@ vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = true
 vim.opt.smarttab = true
+vim.opt.signcolumn = "yes"
 
 -- theme
 vim.cmd.colorscheme "catppuccin-latte"
