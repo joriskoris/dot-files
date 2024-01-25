@@ -141,6 +141,9 @@ require("neodev").setup({})
 require("neoconf").setup({})
 require("trouble").setup({})
 require("noice").setup({
+  cmdline = {
+    view = "cmdline"
+  },
   presets = {
     bottom_search = true,
   }
