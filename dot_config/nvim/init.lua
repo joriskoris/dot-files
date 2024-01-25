@@ -19,6 +19,17 @@ local plugins = {
   "nvim-tree/nvim-tree.lua",
   "nvim-tree/nvim-web-devicons",
 
+  -- motion
+  "ggandor/leap.nvim",
+
+  -- yaml manifests
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    config = function()
+      require("telescope").load_extension("yaml_schema")
+    end
+  },
+
   -- comments
   {
     "numToStr/Comment.nvim",
@@ -151,6 +162,8 @@ cmp.setup({
 })
 
 
+local yamlCfg = require("yaml-companion").setup({})
+
 -- mason
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -162,7 +175,14 @@ require("mason-lspconfig").setup_handlers({
       capabilities = capabilities
     })
   end,
+  ["yamlls"] = function()
+    require("lspconfig")["yamlls"].setup(yamlCfg)
+  end
 })
+
+
+-- motion
+require("leap").create_default_mappings()
 
 -- telescope
 require("telescope").setup({})
@@ -196,6 +216,9 @@ wk.register({
     h = { telescope.help_tags, "Help Tags" },
     d = { telescope.diagnostics, "Diagnostics" },
     t = { telescope.treesitter, "Treesitter" },
+    y = { function()
+      vim.cmd("Telescope yaml_schema")
+    end, "Yaml Schema Selector" },
   },
   ["<leader>c"] = {
     name = "+Copilot",
