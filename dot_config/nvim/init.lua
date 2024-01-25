@@ -21,6 +21,8 @@ local plugins = {
 
   -- motion
   "ggandor/leap.nvim",
+  -- statusline
+  "nvim-lualine/lualine.nvim",
 
   -- yaml manifests
   {
@@ -50,6 +52,10 @@ local plugins = {
   "folke/neodev.nvim",
   "folke/neoconf.nvim",
   "folke/trouble.nvim",
+  {
+    "folke/noice.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+  },
 
   {
     'nvim-telescope/telescope.nvim',
@@ -100,17 +106,50 @@ vim.opt.smarttab = true
 vim.opt.signcolumn = "yes"
 
 -- theme
+require("catppuccin").setup({
+  flavour = "latte",
+  background = {
+    light = "latte",
+  },
+  integrations = {
+    cmp = true,
+    gitsigns = true,
+    treesitter = true,
+    leap = true,
+    lsp_saga = true,
+    mason = true,
+    nvimtree = true,
+    lsp_trouble = true,
+    which_key = true,
+    noice = true
+  }
+})
+
+
 vim.cmd.colorscheme "catppuccin-latte"
 
 -- sidebar
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup({})
---
+
 -- folke
 require("neodev").setup({})
 require("neoconf").setup({})
 require("trouble").setup({})
+require("noice").setup({
+  presets = {
+    bottom_search = true,
+  }
+})
+
+
+require("lualine").setup({
+  options = {
+    theme = "catppuccin-latte"
+  }
+})
+
 
 -- treesitter
 require("nvim-treesitter.configs").setup({
