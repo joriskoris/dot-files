@@ -60,7 +60,7 @@ local plugins = {
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function ()
+    config = function()
       require("telescope").load_extension("noice")
     end
   },
@@ -243,7 +243,8 @@ wk.register({
     name = "+NvimTree",
     t = { "<cmd>NvimTreeToggle<cr>", "NvimTreeToggle" },
     f = { "<cmd>NvimTreeFocus<cr>", "NvimTreeFocus" },
-    r = { "<cmd>NvimTreeRefresh<cr>", "NvimTreeRefresh" }
+    r = { "<cmd>NvimTreeRefresh<cr>", "NvimTreeRefresh" },
+    s = { "<cmd>NvimTreeFindFile<cr>", "NvimTreeFindFile" },
   },
   ["<leader>x"] = {
     name = "+Trouble",
