@@ -23,6 +23,8 @@ local plugins = {
   "ggandor/leap.nvim",
   -- statusline
   "nvim-lualine/lualine.nvim",
+  -- git
+  "lewis6991/gitsigns.nvim",
 
   -- yaml manifests
   {
@@ -231,6 +233,9 @@ require("leap").create_default_mappings()
 
 -- telescope
 require("telescope").setup({})
+
+-- git
+require("gitsigns").setup({})
 
 -- keybindings
 local telescope = require("telescope.builtin")
