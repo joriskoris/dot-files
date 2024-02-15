@@ -13,7 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   -- theme
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000
+  },
 
   -- sidebar
   "nvim-tree/nvim-tree.lua",
@@ -33,6 +37,10 @@ local plugins = {
       require("telescope").load_extension("yaml_schema")
     end
   },
+
+
+  -- formatting
+  "mhartington/formatter.nvim",
 
   -- comments
   {
@@ -95,20 +103,26 @@ local plugins = {
       require("copilot").setup({})
     end,
   },
+
+
+  -- indents
+  { "lukas-reineke/indent-blankline.nvim" }
 }
 
 require("lazy").setup(plugins)
 
 vim.g.mapleader = ";"
 
+
 vim.opt.termguicolors = true
 vim.opt.number = true
+vim.opt.signcolumn = "yes"
+
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = true
 vim.opt.smarttab = true
-vim.opt.signcolumn = "yes"
 
 -- theme
 require("catppuccin").setup({
@@ -163,8 +177,10 @@ require("lualine").setup({
 require("nvim-treesitter.configs").setup({
   auto_install = true,
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = { enable = false },
 })
+
+require("ibl").setup({});
 
 -- lsp
 local luasnip = require("luasnip")
@@ -228,6 +244,21 @@ require("mason-lspconfig").setup_handlers({
 })
 
 
+-- formatting
+require("formatter").setup({
+  logging = true,
+  log_level = vim.log.levels.WARN,
+  filetype = {
+    typescript = {
+      require("formatter.filetypes.typescript").prettierd
+    },
+    typescriptreact = {
+      require("formatter.filetypes.typescriptreact").prettierd
+    }
+  }
+})
+
+
 -- motion
 require("leap").create_default_mappings()
 
@@ -243,6 +274,7 @@ local wk = require("which-key")
 wk.register({
   ["<leader>"] = {
     q = { "<cmd>cclose<cr>", "quickfix close" },
+    ["<space>"] = { "<cmd>Format<cr>", "format" },
   },
   ["<leader>t"] = {
     name = "+NvimTree",

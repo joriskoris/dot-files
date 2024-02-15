@@ -1,5 +1,14 @@
 {
   "lspconfig": {
+    "lua_ls": {
+      "Lua": {
+        "diagnostics": {
+          "globals": [
+            "vim"
+          ]
+        }
+      }
+    },
     "pylsp": {
       "pylsp.plugins.mypy": {
         "enabled": true
