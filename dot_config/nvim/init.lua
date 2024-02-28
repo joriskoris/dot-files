@@ -41,6 +41,8 @@ local plugins = {
 
   -- formatting
   "mhartington/formatter.nvim",
+  -- linting'
+  "mfussenegger/nvim-lint",
 
   -- comments
   {
@@ -247,16 +249,23 @@ require("mason-lspconfig").setup_handlers({
 -- formatting
 require("formatter").setup({
   logging = true,
-  log_level = vim.log.levels.WARN,
+  log_level = vim.log.levels.DEBUG,
   filetype = {
     typescript = {
-      require("formatter.filetypes.typescript").prettierd
+      require("formatter.filetypes.typescript").prettier
     },
     typescriptreact = {
-      require("formatter.filetypes.typescriptreact").prettierd
+      require("formatter.filetypes.typescriptreact").prettier
     }
   }
 })
+
+-- linting
+local linter = require("lint")
+linter.linters_by_ft = {
+  typescript = { "eslint_d" },
+  typescriptreact = { "eslint_d" }
+}
 
 
 -- motion
@@ -274,7 +283,6 @@ local wk = require("which-key")
 wk.register({
   ["<leader>"] = {
     q = { "<cmd>cclose<cr>", "quickfix close" },
-    ["<space>"] = { "<cmd>Format<cr>", "format" },
   },
   ["<leader>t"] = {
     name = "+NvimTree",
@@ -324,6 +332,10 @@ wk.register({
     k = { "<cmd>Lspsaga hover_doc<cr>", "Lspsaga hover_doc" },
     f = { function()
       vim.lsp.buf.format({ async = true })
-    end, "format" },
+    end, "format (lsp)" },
+    F = { "<cmd>Format<cr>", "format (formatter)" },
+    l = { function()
+      linter.try_lint()
+    end, "lint" }
   }
 })
