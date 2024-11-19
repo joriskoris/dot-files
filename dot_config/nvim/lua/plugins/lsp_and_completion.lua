@@ -5,15 +5,25 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp"
+      "hrsh7th/cmp-nvim-lsp",
+      "zbirenbaum/copilot-cmp",
+      "onsails/lspkind.nvim"
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
       local opts = {
+        formatting = {
+          format = require("lspkind").cmp_format({
+            mode = "symbol",
+            max_width = 50,
+            symbol_map = { Copilot = "" }
+          })
+        },
         sources = {
           { name = "lazydev", group_index = 0 },
+          { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
         },
@@ -51,6 +61,8 @@ return {
       }
 
       cmp.setup(opts)
+
+      require("copilot_cmp").setup({});
     end
   },
   {

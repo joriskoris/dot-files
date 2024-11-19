@@ -54,5 +54,33 @@ return {
     opts = {},
   },
   -- icons
-  { "nvim-tree/nvim-web-devicons" }
+  { "nvim-tree/nvim-web-devicons" },
+  -- formmatting
+  {
+    "mhartington/formatter.nvim",
+    config = function()
+      require("formatter").setup({
+        filetype = {
+          typescript = {
+            require("formatter.filetypes.typescript").prettierd,
+          },
+          typescriptreact = {
+            require("formatter.filetypes.typescriptreact").prettierd,
+          }
+        }
+      })
+    end
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    opts = {
+      mkdp_auto_start = 1,
+    },
+    build = function()
+      vim.cmd [[Lazy load markdown-preview.nvim]]
+      vim.fn['mkdp#util#install']()
+    end,
+  },
+
 }

@@ -19,6 +19,7 @@ vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = true
 vim.opt.smarttab = true
+vim.opt.signcolumn = "yes"
 
 -- Setup lazy.nvim
 require("lazy").setup({

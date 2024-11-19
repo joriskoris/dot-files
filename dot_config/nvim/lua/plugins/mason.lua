@@ -10,16 +10,16 @@ return {
       "neovim/nvim-lspconfig"
     },
     opts = {
-      ensure_installed = { "lua_ls", "pyright", "ruff" },
+      ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "eslint", "jsonls" },
       automatic_installation = true,
     },
     config = function(LazyPlugin, opts)
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       require("mason-lspconfig").setup(opts)
-      require("mason-lspconfig").setup_handlers{
-        function (server_name)
-          require("lspconfig")[server_name].setup{
+      require("mason-lspconfig").setup_handlers {
+        function(server_name)
+          require("lspconfig")[server_name].setup {
             capabilities = capabilities,
           }
         end
