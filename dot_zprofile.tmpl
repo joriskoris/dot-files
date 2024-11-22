@@ -3,17 +3,27 @@ export EDITOR=nvim
 alias ls="eza"
 alias cat="bat"
 
+{{ if eq .chezmoi.os "darwin" -}}
 # setup homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ end -}}
 
 # add local python binaries to path
 export PATH="$HOME/.local/bin:$PATH"
 
+{{ if eq .chezmoi.os "darwin" -}}
 # setup nvm
 export NVM_DIR="$HOME/.nvm"
   [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" 
   [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" 
+{{ else if eq .chezmoi.os "linux" -}}
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+{{ end -}}
 
-
-# Added by OrbStack: command-line tools and integration
+{{ if eq .chezmoi.os "darwin" -}}
+# setup homebrew
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+{{ end -}}
+

@@ -1,7 +1,15 @@
+{{ if eq .chezmoi.os "darwin" -}}
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+{{ else if eq .chezmoi.os "linux" -}}
+source ~/.antidote/antidote.zsh
+{{ end -}}
+
+
 antidote load
 
+{{ if eq .chezmoi.os "darwin" -}}
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
+{{ end -}}
 
 autoload -U promptinit; promptinit
 prompt pure
