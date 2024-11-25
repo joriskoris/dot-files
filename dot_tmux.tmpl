@@ -3,4 +3,8 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'catppuccin/tmux'
 set -g @catppuccin_flavour 'mocha'
 
+{{ if eq .chezmoi.os "darwin" -}}
 run '/opt/homebrew/opt/tpm/share/tpm/tpm'
+{{ else if eq .chezmoi.os "linux" -}}
+run '~/.tmux/plugins/tpm/tpm'
+{{ end -}}
